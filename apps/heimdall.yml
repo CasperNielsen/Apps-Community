@@ -31,7 +31,7 @@
           traefik.enable: 'true'
           traefik.https.port: '443'
           traefik.https.frontend.entryPoints: 'https'
-          traefik.https.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}},{{tldset}}'
+          traefik.https.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}}{{tldset}}{{cname}}'
 
     - name: 'Setting PG Volumes'
       set_fact:
@@ -52,7 +52,7 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '127.0.0.0.1:1112:443'
+          - '127.0.0.1:1112:443'
           - '{{ports.stdout}}1111:80'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
